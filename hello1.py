@@ -1,6 +1,7 @@
 from flask import Flask
 from markupsafe import escape
 from flask import url_for
+from flask import request
 
 app = Flask(__name__)
 
@@ -65,8 +66,4 @@ with app.test_request_context():
     print(url_for('login'))
     print(url_for('login', next='/'))
     print(url_for('profile',username = 'John Doe'))
-
-
-
-
 

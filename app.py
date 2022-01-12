@@ -1,11 +1,11 @@
-from flask import Flask, render_template, \
-  request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
 #import pymysql.cursors, os
 import pymysql
 
 application = Flask(__name__)
 
 conn = cursor = None
+
 #fungsi koneksi database
 def openDb():
    global conn, cursor
@@ -15,11 +15,13 @@ def openDb():
        password="",
        db="db_penjualan" )
    cursor = conn.cursor()	
+
 #fungsi untuk menutup koneksi
 def closeDb():
    global conn, cursor
    cursor.close()
    conn.close()
+
 #fungsi view index() untuk menampilkan data dari database
 @application.route('/')
 def index():   
@@ -49,6 +51,7 @@ def tambah():
       return redirect(url_for('index'))
    else:
       return render_template('tambah.html')
+
 #fungsi view edit() untuk form edit
 @application.route('/edit/<id_barang>', methods=['GET','POST'])
 def edit(id_barang):
@@ -69,6 +72,7 @@ def edit(id_barang):
    else:
       closeDb()
       return render_template('edit.html', data=data)
+      
 #fungsi untuk menghapus data
 @application.route('/hapus/<id_barang>', methods=['GET','POST'])
 def hapus(id_barang):
